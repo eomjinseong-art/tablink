@@ -224,7 +224,7 @@
     <div class="logo-title">나두 탭링크 (Nadoo Tablink)</div>
     <p class="subtitle">틱톡·쇼츠 댓글 링크 안 눌릴 때? 아이폰 뒷면 톡톡 두드려 바로 열기!</p>
     <div class="visitor-counter">
-      👁️ 누적 방문자 수: <span id="busuanzi_value_site_pv">불러오는 중...</span>
+      👁 <span id="visitor-count"></span>
     </div>
   </header>
 
@@ -375,7 +375,45 @@ def extract_link():
     <p>© Nadoo Tablink Project. All rights reserved.</p>
   </footer>
 
-  <!-- 방문자 카운터 스크립트 -->
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script>
+    (function () {
+      var BASE = 'https://abacus.jasoncameron.dev';
+      var NAMESPACE = 'tablinkyo';
+      var KEY = 'visits';
+      var STORAGE_KEY = 'abacus_visit_date';
+      var el = document.getElementById('visitor-count');
+
+      function today() {
+        var d = new Date();
+        return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+      }
+
+      function alreadyHitToday() {
+        try {
+          return localStorage.getItem(STORAGE_KEY) === today();
+        } catch (e) {
+          return false;
+        }
+      }
+
+      function markHitToday() {
+        try {
+          localStorage.setItem(STORAGE_KEY, today());
+        } catch (e) {}
+      }
+
+      var endpoint = alreadyHitToday() ? 'get' : 'hit';
+
+      fetch(BASE + '/' + endpoint + '/' + NAMESPACE + '/' + KEY)
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          if (typeof data.value === 'number') {
+            if (endpoint === 'hit') markHitToday();
+            el.textContent = data.value;
+          }
+        })
+        .catch(function () {});
+    })();
+  </script>
 </body>
 </html>
