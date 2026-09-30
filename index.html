@@ -216,6 +216,14 @@
       border-top: 1px solid var(--border-color);
       margin-top: 50px;
     }
+        /* Coupang Partners footer banner (광고) */
+        .cpb { max-width: 640px; margin: 0 auto 24px; padding: 0; text-align: left; }
+        .cpb-link { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border: 1px solid var(--border-color); border-radius: 12px; background: var(--card-bg); color: var(--text-color); font-size: 14px; line-height: 1.5; text-decoration: none; word-break: keep-all; transition: border-color .15s ease, color .15s ease; }
+        .cpb-link:hover, .cpb-link:focus-visible { border-color: var(--accent-color); color: var(--accent-color); text-decoration: none; }
+        .cpb-label { flex-shrink: 0; padding: 1px 6px; border: 1px solid var(--border-color); border-radius: 4px; color: var(--text-muted); font-size: 11px; line-height: 1.5; }
+        .cpb-copy { flex: 1; min-width: 0; }
+        .cpb-arrow { flex-shrink: 0; color: var(--accent-color); }
+        .cpb-note { margin: 8px 0 0; color: var(--text-muted); font-size: 11px; line-height: 1.6; text-align: center; word-break: keep-all; }
   </style>
 </head>
 <body>
@@ -372,6 +380,14 @@ def extract_link():
   </main>
 
   <footer>
+    <aside class="cpb" aria-label="광고">
+      <a class="cpb-link" href="https://link.coupang.com/a/hsdzLh1vB6" target="_blank" rel="sponsored noopener noreferrer nofollow">
+        <span class="cpb-label">광고</span>
+        <span class="cpb-copy">탭은 링크로 정리하고, 장바구니는 쿠팡에서 정리해 보세요</span>
+        <span class="cpb-arrow" aria-hidden="true">→</span>
+      </a>
+      <p class="cpb-note">이 게시물은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
+    </aside>
     <p>© Nadoo Tablink Project. All rights reserved.</p>
   </footer>
 
